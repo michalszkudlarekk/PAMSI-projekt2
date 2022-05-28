@@ -3,10 +3,10 @@
 
 #include <iostream>
 
-class Exception /* Klasa odpowiedzalna za "łapanie" błędów */
+class exception /* Klasa odpowiedzalna za "łapanie" błędów */
 {
 public:
-    Exception(const std::string &err)
+    exception(const std::string &err)
         : errMsg(err) {}
     std::string getError() { return errMsg; }
 

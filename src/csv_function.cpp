@@ -14,7 +14,7 @@ void uploadFileIntoSequence(Sequence *seq, rapidcsv::Document doc)
     {
         rating = doc.GetCell<float>("rating", i);
         title = doc.GetCell<std::string>("movie", i);
-        seq->insertBack(Element(rating, title));
+        seq->insertBack(element(rating, title));
     }
 }
 void uploadFileIntoSequence(sequence *seq, rapidcsv::Document doc, int size)
@@ -30,7 +30,7 @@ void uploadFileIntoSequence(sequence *seq, rapidcsv::Document doc, int size)
     {
         rating = doc.GetCell<float>("rating", i);
         title = doc.GetCell<std::string>("movie", i);
-        seq->insertBack(Element(rating, title));
+        seq->insertBack(element(rating, title));
     }
 }
 

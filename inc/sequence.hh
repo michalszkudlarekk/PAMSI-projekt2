@@ -6,72 +6,71 @@
 class sequence /* Klasa pozwalająca na dostęp dowolnych elementów listy dwukierunkowej*/
 {
 private:
-    class Node /* Węzeł listy dwukierunkowej */
+    class node /* Węzeł listy dwukierunkowej */
     {
     public: /* Konstruktor */
-        Node()
+        node()
         {
             next = NULL;
             previous = NULL;
         }
-        Node *getNext() { return next; }         /* zwraca wskaźnik na następny węzeł */
-        Node *getPrevious() { return previous; } // zwraca wskaźnik na poprzedni węzeł
-        ~Node()
-        {
+        node *getNext() { return next; }         /* Zwrócenie wskaźnika na następny węzeł */
+        node *getPrevious() { return previous; } /* Zwrócenie wskaźnika na poprzedni węzeł */
+        ~node()
+        { /* Ustawienie następnego i poprzedniego węzła na zero */
             next = NULL;
             previous = NULL;
-        }                // desktruktor
-        friend sequence; // zaprzyjaźniona klasa sequence
+        }
+        friend sequence; /* Pomocnicza(zaprzyjaźniona) klasa do sequence */
     private:
-        Node *next;     // wskaźnik na następny węzeł
-        Node *previous; // wskaźnik na poprzeni węzeł
-        Element elem;   // zawartość węzła
+        node *next;     /* Wskaźnik na następny węzeł */
+        node *previous; /* Wskaźnik na poprzedni węzeł */
+        element elem;   /* Zawartosć węzła*/
     };
 
 public:
-    // klasa pozwalająca na poruszanie się po węzłach
-    class iterator
+    class iterator /* Klasa umożliwiająca na poruszanie się po węzłach */
     {
     public:
-        Element &operator*();                     // referencja do elementu
-        bool operator==(const iterator &p) const; // porównanie pozycji
-        bool operator!=(const iterator &p) const; // sprawdzanie czy różne
-        iterator &operator++();                   // przejdź do następnego węzła
-        iterator &operator--();                   // przejdź do poprzedniego węzła
-        friend sequence;                          // zaprzyjaźniona klasa Sequence
+        element &operator*();                            /* Referencja do poszczególnego elementu */
+        bool operator==(const iterator &iterator) const; /* Porównanie pozycji*/
+        bool operator!=(const iterator &iterator) const; /* Sprawdzenie czy pozycje się różnią*/
+        iterator &operator++();                          /* Przejście do następnego wezła*/
+        iterator &operator--();                          /* Przejście do poprzedniego węzła*/
+        friend sequence;                                 /* Pomocnicza(zaprzyjaźniona) klasa do sequence */
     private:
-        Node *wezel;       // wskaźnik na węzeł
-        Iterator(Node *u); // utwórz od węzła, konstruktor
+        node *node;        /* Wskaźnik na węzeł */
+        iterator(node *u); /* Utworzenie od węzła, konstruktor ( u - utwórz) */
     };
 
 public:
-    sequence();                                       // konstruktor
-    sequence(const sequence &sequence);               // konstruktor kopiujący
-    sequence(const sequence &sequence, int size);     // konstruktor kopiujący z rozmiarem
-    sequence &operator=(const sequence &sequence);    // operator przyrównania dla sekwencji (też może funkcjonować jako konstruktor kopiujący)
-    int size() const;                                 // zwraca rozmiar sekwencji
-    bool isEmpty() const;                             // czy pusta?
-    iterator begin() const;                           // zwraca pozycję pierwszego elementu
-    iterator end() const;                             // zwraca pozycję ostatniego elementu
-    void insertBack(const Element &e);                // umieszczanie nowego Elementu e na końcu sekwencji
-    void insertFront(const Element &e);               // umieszczanie nowego Elementu e na początku sekwencji
-    void insert(const iterator &p, const Element &e); // umieszczanie nowego Elementu e w sekwencji przed Iteratorze p
-    void eraseFront();                                // usuwanie pierwszego węzła sekwencji
-    void eraseBack();                                 // usuwanie ostatniego węzła sekwencji
-    void erase(const iterator &p);                    // usuwanie Elementu o Iteratorze p
-    iterator atIndex(int i) const;                    // zwraca Iterator znajdujący się na indeksie i
-    int indexOf(const iterator &p) const;             // zwraca indeks Iteratora p
-    float medium();                                   // mediana
-    float sumOfKeys();                                // suma kluczy wszystkich elementów sekwencji
-    float average();                                  //średnia kluczy wszystkich elementów
-    bool isSorted();                                  // funkcja sprawdza, czy sekwencja jest posortowana
-    void clear();                                     // funkcja usuwa wszystkie elementy z sekwencji
-    ~sequence();                                      // destruktor
+    sequence();                                       /* Konstruktor*/
+    sequence(const sequence &sequence);               /* Konstruktor kopiujący */
+    sequence(const sequence &sequence, int size);     /* Konstruktor z rozmiarem*/
+    sequence &operator=(const sequence &sequence);    /* Operator przyrównania dla sekwencji*/
+    int size() const;                                 /* Zwrócenie rozmiaru sekwencji*/
+    bool isEmpty() const;                             /* Sprawdzenie czy pusta sekwencja */
+    iterator begin() const;                           /* Zwrócenie pozycji pierwszego elementu*/
+    iterator end() const;                             /* Zwrócenie pozycji ostatniego elementu*/
+    void insertBack(const element &e);                /* Umieszczenie nowego elemetnu na końcu sekwencji ( e - element) */
+    void insertFront(const element &e);               /* Umieszczenie nowego elemetnu na początku sekwencji ( e - element) */
+    void insert(const iterator &p, const element &e); /* Umieszczenie nowego elemetnu przed iteratorem */
+    void eraseFront();                                /* Usunięcie pierwszego węzła sekwencji */
+    void eraseBack();                                 /* Usunięcie ostatniego węzła sekwencji */
+    void erase(const iterator &p);                    /* Usunięcie elementu o iteratorze p */
+    iterator atIndex(int i) const;                    /* Zwrócenie iteratora znajdującego się na indeksie i ( i - indeks)*/
+    int indexOf(const iterator &p) const;             /* Zwrócenie indeksu iteratora p */
+    float medium();                                   /* Mediana */
+    float sumOfKeys();                                /* Suma wszystkich kluczy elementów sekwencji */
+    float average();                                  /* Średnia wszystkich kluczy elementów sekwencji */
+    bool isSorted();                                  /* Sprawdzenie czy dana sekwencja jest dobrze posortowana */
+    void clear();                                     /* Usunięcie wszystkich elementów z sekwencji */
+    ~sequence();                                      /* Dekonstruktor */
 
 private:
-    int numberOfItems; // liczba elementów
-    Node *header;      // wskaźnik na pierwszy element
-    Node *trailer;     // wskaźnik na ostatni element
+    int numberOfItems; /* Liczba wszystkich elementów */
+    Node *header;      /* Wskaźnik na pierwszy element */
+    Node *trailer;     /* Wskaźnik na ostatni element */
 };
 
 #endif

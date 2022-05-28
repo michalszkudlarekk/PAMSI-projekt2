@@ -1,14 +1,14 @@
 #include "algorithms.hh"
 
-bool isLess(Element a, Element b)
+bool isLess(element a, element b)
 {
     return (a.getKey() < b.getKey());
 }
 
-void merge(sequence &S1, sequence &S2, sequence &S) /* Scalanie */
+void merge(sequence &sequence1, sequence &sequence2, sequence &sequence) /* Scalanie */
 {
-    sequence::iterator p1 = S1.begin();
-    sequence::iterator p2 = S2.begin();
+    Sequence::Iterator p1 = S1.begin();
+    Sequence::Iterator p2 = S2.begin();
     while (p1 != S1.end() && p2 != S2.end())
     {
         if (isLess(*p1, *p2))
@@ -35,7 +35,7 @@ void merge(sequence &S1, sequence &S2, sequence &S) /* Scalanie */
     };
 }
 
-void mergeSort(sequence &S) /* Sortowanie przez scalanie */
+void mergeSort(sequence &sequence) /* Sortowanie przez scalanie */
 {
     int n = S.size();
     if (n <= 1)
@@ -67,7 +67,7 @@ void QuickSort(sequence &S) /* Sortowanie szybkie */
     if (S.size() <= 1)
         return;
 
-    Element p = *(--S.end());
+    element p = *(--S.end());
 
     sequence L, E, G;
 
