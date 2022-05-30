@@ -6,16 +6,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-class element /* Klasa element */
+class Element /* Klasa element */
 {
 
 public:
-    element() /* Konstruktor */
+    Element() /* Konstruktor */
     {
         key = 0;
         contents = "";
     }
-    element(float k, std::string c) /* Konstruktor odpowiadający za kopiowanie */
+    Element(float k, std::string c) /* Konstruktor odpowiadający za kopiowanie */
     {
         key = k;
         contents = c;

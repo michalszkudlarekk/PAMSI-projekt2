@@ -112,16 +112,15 @@ Sequence &Sequence::operator=(const Sequence &sekwencja)
         {
             this->insertBack(sekwencja.atIndex(i).wezel->elem); // uzupełnanie sekwencji
         }
-        this->header->next = this->begin().wezel; // ustawianie headera na pierwszy węzeł
+        this->header->next = this->begin().wezel; /* ustawianie headera jako pierwszy węzeł */
         this->begin().wezel->previous = header;
-        this->trailer->previous = this->end().wezel; // ustawianie trailera na ostatni węzeł
+        this->trailer->previous = this->end().wezel; /* ustawianie trailera jako ostatni węzeł */
         this->end().wezel->next = trailer;
     }
     return *this;
 }
 
-// zwraca Iterator znajdujący się na indeksie i
-Sequence::Iterator Sequence::atIndex(int i) const
+Sequence::Iterator Sequence::atIndex(int i) const /* Zwrócenie iteratora znajdującego się na indeksie i*/
 {
     Iterator p = begin();
     for (int j = 0; j < i; j++)
@@ -129,8 +128,7 @@ Sequence::Iterator Sequence::atIndex(int i) const
     return p;
 }
 
-// zwraca indeks Iteratora p
-int Sequence::indexOf(const Iterator &p) const
+int Sequence::indexOf(const Iterator &p) const /* Zwrócenie indeksu iteratora p*/
 {
     Iterator q = begin();
     int j = 0;
@@ -142,82 +140,73 @@ int Sequence::indexOf(const Iterator &p) const
     return j;
 }
 
-// zwraca rozmiar sekwencji
-int Sequence::size() const
+int Sequence::size() const /* Zwrócenie rozmiaru sekwencji */
 {
     return numberOfItems;
 }
 
-// czy sekwencja jest pusta?
-bool Sequence::isEmpty() const
+bool Sequence::isEmpty() const /* Sprawdzenie czy sekwencja jest pusta */
 {
     return (numberOfItems == 0);
 }
 
-// zwraca Iterator będący pierwszym elementem sekwencji
+/* Zwraca iterator będący pierwszym elementem sekwencji */
 Sequence::Iterator Sequence::begin() const
 {
     return Iterator(header->next);
 }
 
-// zwraca Iterator będący ostatnim elementem sekwencji
-Sequence::Iterator Sequence::end() const
+Sequence::Iterator Sequence::end() const /* Zwrócenie iteratora będącego ostatnim elementem sekwencji */
 {
     return Iterator(trailer);
 }
 
-// umieszczanie nowego Elementu e w sekwencji przed Iteratorze p
-void Sequence::insert(const Iterator &p, const Element &e)
+void Sequence::insert(const Iterator &p, const Element &e) /* Umieszczenie nowego elementu e w sekwencji przed iteratorem p */
 {
-    Node *w = p.wezel;     // w wskazuje na węzeł p
-    Node *u = w->previous; // u wskazuje na element poprzedni do p
-    Node *v = new Node;    // v zostanie nowym węzłem
-    v->elem = e;           // uzupełnienie węzła v Elementem e
+    Node *w = p.wezel;     /* w zostaje dołączone do węzła p */
+    Node *u = w->previous; /* u zostaje dołączone na element poprzedni do p */
+    Node *v = new Node;    /* v jako nowy węzeł */
+    v->elem = e;           /*uzupełnienie węzła v elementem e */
     v->next = w;
-    w->previous = v; // v porzedza w
+    w->previous = v; /*v przed w */
     v->previous = u;
-    u->next = v; // v jest po u
+    u->next = v; /* v po u */
     numberOfItems++;
 }
 
-// umieszczanie nowego Elementu e na końcu sekwencji
-void Sequence::insertBack(const Element &e)
+void Sequence::insertBack(const Element &e) /* Umieszczenie nowego elementu e na końcu sekwencji */
 {
     insert(end(), e);
 }
 
-// umieszczanie nowego Elementu e na początku sekwencji
-void Sequence::insertFront(const Element &e)
+void Sequence::insertFront(const Element &e) /* Umieszczenie nowego elementu e na początku sekwencji */
 {
     insert(begin(), e);
 }
 
-// usuwanie Elementu o Iteratorze p
-void Sequence::erase(const Iterator &p)
+void Sequence::erase(const Iterator &p) /* Usuwanie elementu o iteratorze p */
 {
-    Node *v = p.wezel;     // węzeł do usunięcia
-    Node *w = v->next;     // następny węzeł
-    Node *u = v->previous; // poprzedni węzeł
+    Node *v = p.wezel;     /* Węzeł do usunięcia  */
+    Node *w = v->next;     /* Następny węzeł */
+    Node *u = v->previous; /* Poprzedni węzeł */
     u->next = w;
-    w->previous = u; // odczepianie połączeń do p
+    w->previous = u; /* Odłączenie połączeń do p */
 
-    delete v;        // usuwanie węzła
-    numberOfItems--; // zmiejszanie rozmiaru sekwencji
+    delete v;        /* Usunięcię węzła */
+    numberOfItems--; /* Postdekrementacja rozmiaru sekwencji */
 }
 
-// usuwanie pierwszego węzła sekwencji
-void Sequence::eraseFront()
+void Sequence::eraseFront() /* Usunięcie pierwszego węzła sekwencji */
 {
     erase(begin());
 }
 
-// usuwanie ostatniego węzła sekwencji
-void Sequence::eraseBack()
+void Sequence::eraseBack() /* Usunięcie ostatniego węzła sekwencji */
 {
     erase(--end());
 }
 
-float Sequence::medium()
+float Sequence::medium() /* Mediana */
 {
     float medium = 0;
     if (this->isSorted())
@@ -251,7 +240,7 @@ float Sequence::average()
     average = this->sumOfKeys() / this->size();
     return average;
 }
-bool Sequence::isSorted()
+bool Sequence::isSorted() /* sprawdzenie czy posortowano */
 {
     if (this->size() == 0)
         return false;
@@ -266,10 +255,10 @@ bool Sequence::isSorted()
     }
     return true;
 }
-void Sequence::clear()
+void Sequence::clear() /* Usunięcie poprzednich elementó sekwencji */
 {
     while (this->size() > 0)
-    { // usuwanie poprzednich elementów sekwencji
+    {
         this->eraseBack();
     }
 }

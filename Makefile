@@ -1,23 +1,26 @@
-__start__: sort
-	./sort
+CXXFLAGS=-g -Iinc -Wall -pedantic -std=c++11
 
-./sort:obj obj/main.o obj/csv_function.o obj/sequence.o obj/algorithms.o
-	g++ -o ./sort obj/main.o obj/csv_function.o obj/sequence.o obj/algorithms.o
+
+
+__start__: ./sorting
+	
+./sorting:obj obj/main.o obj/csv_functions.o obj/sequence.o obj/sorting_algorithms.o
+	g++ -Wall -pedantic -std=c++11  -o ./sorting obj/main.o obj/csv_functions.o obj/sequence.o obj/sorting_algorithms.o
 
 obj:
 	mkdir -p obj
 
-obj/main.o: src/main.cpp inc/csv_function.hh inc/sequence.hh inc/element.hh inc/algorithms.hh
-	g++ -c -o obj/main.o src/main.cpp
+obj/main.o: src/main.cpp inc/csv_functions.hh inc/sequence.hh inc/element.hh inc/sorting_algorithms.hh
+	g++ -c ${CXXFLAGS} -o obj/main.o src/main.cpp
 
-obj/csv_function.o: inc/csv_function.hh src/csv_function.cpp inc/sequence.hh inc/element.hh
-	g++ -c -o obj/csv_function.o src/csv_function.cpp
+obj/csv_functions.o: inc/csv_functions.hh src/csv_functions.cpp inc/sequence.hh inc/element.hh
+	g++ -c ${CXXFLAGS} -o obj/csv_functions.o src/csv_functions.cpp
 
 obj/sequence.o: inc/sequence.hh src/sequence.cpp inc/element.hh
-	g++ -c -o obj/sequence.o src/sequence.cpp
+	g++ -c ${CXXFLAGS} -o obj/sequence.o src/sequence.cpp
 
-obj/algorithms.o: inc/algorithms.hh src/algorithms.cpp inc/sequence.hh inc/element.hh
-	g++ -c -o obj/algorithms.o src/algorithms.cpp
+obj/sorting_algorithms.o: inc/sorting_algorithms.hh src/sorting_algorithms.cpp inc/sequence.hh inc/element.hh
+	g++ -c ${CXXFLAGS} -o obj/sorting_algorithms.o src/sorting_algorithms.cpp
 
 clean:
-	rm -f *.o ./sort
+	rm -f *.o ./sorting
