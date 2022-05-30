@@ -9,8 +9,8 @@ int main()
 {
 
      Sequence MainSequence;
-
-     rapidcsv::Document doc("./projekt2_dane.csv", rapidcsv::LabelParams(0, 0), rapidcsv::SeparatorParams(),
+     /*Dane z eportalu zostały zedytowane w celu wykonania pomiarów dla wartości większych od 400k */
+     rapidcsv::Document doc("./projekt2_dane.CNGRDs-i.csv", rapidcsv::LabelParams(0, 0), rapidcsv::SeparatorParams(),
                             rapidcsv::ConverterParams(true));
 
      uploadFileIntoSequence(&MainSequence, doc);
